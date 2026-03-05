@@ -1,4 +1,3 @@
-using System.Text.Json;
 using DrawIo.Cli.Skills;
 using Microsoft.Extensions.Logging;
 
@@ -6,11 +5,6 @@ namespace DrawIo.Cli.Services;
 
 public class SkillInstaller(ILogger<SkillInstaller> logger) : ISkillInstaller
 {
-    private static readonly string SkillsDirectory = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-        ".drawio",
-        "skills");
-
     public async Task<InstallResult> InstallAsync(string skillName, CancellationToken cancellationToken = default)
     {
         logger.LogInformation("Installing skill: {SkillName}", skillName);
@@ -24,17 +18,13 @@ public class SkillInstaller(ILogger<SkillInstaller> logger) : ISkillInstaller
 
         try
         {
-            Directory.CreateDirectory(SkillsDirectory);
+            var skillDir = Path.Combine(Directory.GetCurrentDirectory(), ".claude", "skills", DrawIoSkill.Name);
+            Directory.CreateDirectory(skillDir);
 
-            var skillDefinition = DrawIoSkill.GetDefinition();
-            var filePath = Path.Combine(SkillsDirectory, $"{skillDefinition.Name}.json");
+            var filePath = Path.Combine(skillDir, "SKILL.md");
+            var content = DrawIoSkill.GetSkillMarkdown();
 
-            var json = JsonSerializer.Serialize(skillDefinition, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-
-            await File.WriteAllTextAsync(filePath, json, cancellationToken);
+            await File.WriteAllTextAsync(filePath, content, cancellationToken);
 
             logger.LogInformation("Skill '{SkillName}' installed successfully to {FilePath}", skillName, filePath);
             return new InstallResult(true, filePath);

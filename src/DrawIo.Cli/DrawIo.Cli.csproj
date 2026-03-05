@@ -12,7 +12,7 @@
 
     <!-- NuGet metadata -->
     <PackageId>DrawIo.Cli</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.2.0</Version>
     <Authors>QuinntyneBrown</Authors>
     <Description>A CLI tool for working with Draw.io diagrams</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -23,7 +23,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
-    <PackageReference Include="Spectre.Console" Version="0.49.1" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 

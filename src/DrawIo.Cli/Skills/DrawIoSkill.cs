@@ -3,8 +3,8 @@ namespace DrawIo.Cli.Skills;
 public static class DrawIoSkill
 {
     public const string Name = "drawio";
-    public const string Version = "2.0.0";
-    public const string Description = "A skill that instructs an agent to create professional-quality Draw.io diagrams matching official example standards.";
+    public const string Version = "2.2.0";
+    public const string Description = "Create professional-quality Draw.io diagrams. Use when the user asks to create, generate, or update .drawio diagram files including flowcharts, sequence diagrams, ER diagrams, UML class diagrams, network diagrams, mind maps, swimlane diagrams, org charts, and architecture diagrams.";
 
     public static SkillDefinition GetDefinition() => new()
     {
@@ -13,6 +13,17 @@ public static class DrawIoSkill
         Description = Description,
         Instructions = GetInstructions()
     };
+
+    public static string GetSkillMarkdown() =>
+        $"""
+        ---
+        name: {Name}
+        description: {Description}
+        user-invocable: true
+        ---
+
+        {GetInstructions()}
+        """;
 
     private static string GetInstructions() =>
         """

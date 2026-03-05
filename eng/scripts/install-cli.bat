@@ -1,0 +1,6 @@
+@echo off
+echo Uninstalling DrawIo.Cli (if installed)...
+dotnet tool uninstall -g DrawIo.Cli 2>nul
+echo Installing latest DrawIo.Cli...
+dotnet tool install -g DrawIo.Cli
+echo Done.

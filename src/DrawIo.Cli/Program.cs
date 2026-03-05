@@ -4,7 +4,6 @@ using DrawIo.Cli.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Spectre.Console;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureLogging(logging =>
@@ -21,13 +20,9 @@ var host = Host.CreateDefaultBuilder(args)
 
 var services = host.Services;
 
-AnsiConsole.Write(
-    new FigletText("DrawIo CLI")
-        .Centered()
-        .Color(Color.Blue));
-
-AnsiConsole.MarkupLine("[dim]Draw.io skill management tool[/]");
-AnsiConsole.WriteLine();
+Console.WriteLine("DrawIo CLI");
+Console.WriteLine("Draw.io skill management tool");
+Console.WriteLine();
 
 var rootCommand = new RootCommand("DrawIo CLI – manage Draw.io skills for AI agents.");
 
